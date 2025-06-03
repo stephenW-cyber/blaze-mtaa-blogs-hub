@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Twitter, Instagram, MessageCircle, Phone, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -12,18 +12,29 @@ const Footer = () => {
     'About Us', 'Contact', 'Privacy Policy', 'Terms of Service', 'Advertise'
   ];
 
+  const socialLinks = [
+    { name: 'Facebook', icon: Facebook, url: '#', hoverColor: 'hover:bg-blue-600' },
+    { name: 'Twitter', icon: Twitter, url: '#', hoverColor: 'hover:bg-blue-400' },
+    { name: 'Instagram', icon: Instagram, url: '#', hoverColor: 'hover:bg-pink-600' },
+    { name: 'Threads', icon: MessageCircle, url: '#', hoverColor: 'hover:bg-gray-600' },
+    { name: 'WhatsApp', icon: MessageCircle, url: '#', hoverColor: 'hover:bg-green-600' }
+  ];
+
   return (
     <footer className="bg-gray-900 text-white">
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <div className="bg-gradient-to-r from-blue-600 to-orange-500 p-2 rounded-lg">
                 <span className="text-white font-bold text-xl">BM</span>
               </div>
-              <span className="text-2xl font-bold">BlazeMtaa</span>
+              <span className="text-2xl font-bold">
+                <span className="text-red-500">Blaze</span>
+                <span className="text-black">Mtaa</span>
+              </span>
             </div>
             <p className="text-gray-300 mb-4">
               Your trusted source for breaking news, in-depth analysis, and compelling stories from Kenya and around the world.
@@ -39,7 +50,7 @@ const Footer = () => {
                 <Instagram size={20} />
               </button>
               <button className="p-2 bg-gray-800 rounded-lg hover:bg-red-600 transition-colors">
-                <Youtube size={20} />
+                <MessageCircle size={20} />
               </button>
             </div>
           </div>
@@ -76,6 +87,28 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Follow Us */}
+          <div>
+            <h3 className="text-lg font-bold mb-4">Follow Us</h3>
+            <div className="space-y-3">
+              {socialLinks.map((social) => {
+                const IconComponent = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors group"
+                  >
+                    <div className={`p-2 bg-gray-800 rounded-lg ${social.hoverColor} transition-colors`}>
+                      <IconComponent size={16} />
+                    </div>
+                    <span>{social.name}</span>
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           {/* Contact Info */}
