@@ -1,8 +1,8 @@
-
 import React, { useState } from 'react';
 import { Save, Eye, Upload, X, Image, Video } from 'lucide-react';
 import Layout from '../components/Layout';
 import SEOHead from '../components/SEOHead';
+import { useToast } from '@/hooks/use-toast';
 
 const Write = () => {
   const [title, setTitle] = useState('');
@@ -14,6 +14,7 @@ const Write = () => {
   const [featuredImage, setFeaturedImage] = useState<File | null>(null);
   const [mediaFiles, setMediaFiles] = useState<File[]>([]);
   const [isPreview, setIsPreview] = useState(false);
+  const { toast } = useToast();
 
   const categories = [
     'News', 'Politics', 'Business', 'Sports', 'Entertainment', 'Technology', 'Opinion'
@@ -52,6 +53,22 @@ const Write = () => {
     console.log('Article submitted:', { 
       title, content, excerpt, category, tags, featuredImage, mediaFiles 
     });
+    
+    // Show success toast
+    toast({
+      title: "Article Published!",
+      description: "Your article has been successfully published to BlazeMtaa.",
+    });
+
+    // Reset form
+    setTitle('');
+    setContent('');
+    setExcerpt('');
+    setCategory('');
+    setTags([]);
+    setFeaturedImage(null);
+    setMediaFiles([]);
+    setIsPreview(false);
   };
 
   return (
